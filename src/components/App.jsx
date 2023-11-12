@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
+import { Container } from './GlobalStyle';
 
 import { searchImage } from './Api';
 import { Searchbar } from './Searchbar/Searchbar';
@@ -35,7 +36,7 @@ export class App extends Component {
           return;
         }
         this.setState(prevState => ({
-          images: [...prevState.images, ...newImages],
+          images: [...newImages, ...prevState.images],
           totalImages: response.totalHits,
         }));
       } catch (error) {
@@ -72,7 +73,7 @@ export class App extends Component {
     const { images, error, loading, totalImages } = this.state;
     const showButton = !loading && images.length !== totalImages;
     return (
-      <div>
+      <Container>
         <Searchbar onSubmit={this.handleSearch} />
         {error && <p>{error}</p>}
         <ImageGallery images={images} onClick={this.handleImageClick} />
@@ -80,7 +81,7 @@ export class App extends Component {
         {showButton && <ButtonLoadMore buttonLoadMore={this.handleLoadMore} />}
         {loading && <Loader />}
         <GlobalStyle />
-      </div>
+      </Container>
     );
   }
 }

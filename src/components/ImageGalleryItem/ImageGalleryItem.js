@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Modal } from 'components/Modal/Modal';
+import { InageItem } from './ImageGalleryItem.styled';
 
 export class ImageGalleryItem extends Component {
   state = {
@@ -21,7 +22,7 @@ export class ImageGalleryItem extends Component {
     return (
       <>
         <li onClick={this.openModal}>
-          <img src={image.webformatURL} alt="sdas" width={200} />
+          <InageItem src={image.webformatURL} alt={image.tags}/>
         </li>
         {modalOpen && (
           <Modal
